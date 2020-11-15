@@ -25,15 +25,20 @@ Usage of gcs-diff:
 
 example
 ```
-gcs-diff -b yoan-asset-stoage -cred ../gcs-client/lp-test-263613-a14c3443df95.json -src assets1 -dst assets2
+❯ gcs-diff -b example-storage -cred credential.json -src assets1 -dst assets2
 ---------------------------------------------
-bucket:      yoan-asset-stoage
-credential:  ../gcs-client/lp-test-263613-a14c3443df95.json
+bucket:      example-storage
+credential:  credenital.json
 source:      assets1
 destination: assets2
 ---------------------------------------------
 
-storage: object doesn't exist: gs:/yoan-asset-stoage/assets1/only2.txt
-storage: object doesn't exist: gs:/yoan-asset-stoage/assets2/only1.txt
-storage: Object doesn't match: gs:/yoan-asset-stoage/assets1/samename.txt
++ gs:/example-storage/assets1/only2.txt
+- gs:/example-storage/assets2/only1.txt
+~ gs:/example-storage/assets1/samename.txt
 ```
+
+- `+`: means does not exist in src dir, but exists dst dir
+- `-`: means exists in src dir, but does not exist dst dir
+- `~`: means exist both dir, but CRC32C is changed
+- `(not output)`: means exist both dir, and same CEC32C

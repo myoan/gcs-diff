@@ -20,16 +20,16 @@ func compare(ctx context.Context, bname string, bh *storage.BucketHandle, src, d
 
 	sAttr, err := bh.Object(srcPath).Attrs(ctx)
 	if err != nil {
-		fmt.Printf("%v: %s\n", err, filepath.Join(fmt.Sprintf("gs://%s", bname), srcPath))
+		fmt.Printf("+ %s\n", filepath.Join(fmt.Sprintf("gs://%s", bname), srcPath))
 		return
 	}
 	dAttr, err := bh.Object(dstPath).Attrs(ctx)
 	if err != nil {
-		fmt.Printf("%v: %s\n", err, filepath.Join(fmt.Sprintf("gs://%s", bname), dstPath))
+		fmt.Printf("- %s\n", filepath.Join(fmt.Sprintf("gs://%s", bname), dstPath))
 		return
 	}
 	if sAttr.CRC32C != dAttr.CRC32C {
-		fmt.Printf("storage: Object doesn't match: %s\n", filepath.Join(fmt.Sprintf("gs://%s", bname), srcPath))
+		fmt.Printf("~ %s\n", filepath.Join(fmt.Sprintf("gs://%s", bname), srcPath))
 		return
 	}
 	return
